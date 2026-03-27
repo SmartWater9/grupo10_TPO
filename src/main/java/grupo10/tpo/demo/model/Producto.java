@@ -5,8 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import jakarta.persistence.JoinColumn;
+
 
 @Data
 @Entity
@@ -26,4 +29,8 @@ public class Producto {
     private String descripcion;
     private Long categoriaId;
     
+    @ManyToOne
+    @JoinColumn(name = "categoriaId", insertable = false, updatable = false)
+    private Categoria categoria;
+
 }
