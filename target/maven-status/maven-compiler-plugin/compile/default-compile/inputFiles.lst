@@ -1,0 +1,17 @@
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/DemoApplication.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ControllerCategoria.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ControllerProducto.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ControllerUsuario.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ProductoController.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/dto/ProductoDTO.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Categoria.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Pedido.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Producto.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Usuario.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/enums/Sexo.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/repository/CategoriaRepository.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/repository/ProductoRepository.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/repository/UsuarioRepository.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/service/CategoriaService.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/service/ProductoService.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/service/UsuarioService.java
