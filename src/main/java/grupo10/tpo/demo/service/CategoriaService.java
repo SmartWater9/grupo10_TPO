@@ -1,12 +1,12 @@
 package grupo10.tpo.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import grupo10.tpo.demo.model.Categoria;
+import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.CategoriaRepository;
 
 @Service
@@ -19,19 +19,21 @@ public class CategoriaService {
         return categoriaRepository.findAll();   
     }
 
-    public Optional<Categoria> getCategoriaById(Long id) {
-        return categoriaRepository.findById(id);
+    public Categoria getCategoriaById(Long id) {
+        return categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
     }
 
     public Categoria save(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
-    public Categoria eliminar(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).orElse(null);
-        if (categoria != null) {
-            categoriaRepository.deleteById(id);
+    public void eliminar(Long id) {
+        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+
+        for(Producto p : categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada")).getProductos()) {
+            p.getCategorias().remove(categoria);
         }
-        return categoria;
+
+        categoriaRepository.delete(categoria);
     }
 }

@@ -9,5 +9,5 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     //findAll() ya está implementado por JpaRepository, no es necesario definirlo aquí
     // select * from productos
-    List<Producto> findByCategoriaId(Long categoriaId);
+    List<Producto> findByCategorias_Id(Long categoriaId);
 }

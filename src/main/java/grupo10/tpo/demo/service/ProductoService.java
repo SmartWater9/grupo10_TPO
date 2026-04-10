@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import grupo10.tpo.demo.dto.ProductoDTO;
+import grupo10.tpo.demo.model.Categoria;
 import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.ProductoRepository;
+import grupo10.tpo.demo.repository.CategoriaRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -19,11 +22,26 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
     
+    @Autowired
+    private CategoriaRepository CategoriaRepository;
+
     public List<Producto> getAllProductos() {
         return productoRepository.findAll();
     }
 
     public Producto save(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
+    public Producto crearProductoConCategorias(ProductoDTO req){
+        Producto producto = new Producto();
+        producto.setNombre(req.getNombre());
+        producto.setDescripcion(req.getDescripcion());
+        producto.setPrecio(req.getPrecio());
+        producto.setStock(req.getStock());
+
+        List<Categoria> categorias = CategoriaRepository.findAllById(req.getCategoriaIds());
+        producto.setCategorias(categorias);
         return productoRepository.save(producto);
     }
 
@@ -39,7 +57,7 @@ public class ProductoService {
     }
     
     public List<Producto> getProductosByCategoriaId(Long categoriaId) {
-        return productoRepository.findByCategoriaId(categoriaId);
+        return productoRepository.findByCategorias_Id(categoriaId);
     }
 
 

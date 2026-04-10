@@ -2,13 +2,19 @@ package grupo10.tpo.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -27,10 +33,12 @@ public class Producto {
     
 
     private String descripcion;
-    private Long categoriaId;
     
-    @ManyToOne
-    @JoinColumn(name = "categoriaId", insertable = false, updatable = false)
-    private Categoria categoria;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "producto_categoria",
+        joinColumns = @JoinColumn(name = "producto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Categoria> categorias = new ArrayList<>();
 
 }

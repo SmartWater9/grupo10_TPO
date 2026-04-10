@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import grupo10.tpo.demo.service.CategoriaService;
-
 import grupo10.tpo.demo.model.Categoria;  
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -16,22 +16,23 @@ public class ControllerCategoria {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public String getAllCategorias() {
-        return "Lista de categorias";
+    public List<Categoria> getAllCategorias() {
+        return categoriaService.getAllCategorias();
     }
 
     @GetMapping("/{id}")
-    public String getCategoriaById(@PathVariable String id) {
-        return "Categoria con ID: " + id;
+    public Categoria getCategoriaById(@PathVariable Long id) {
+        return categoriaService.getCategoriaById(id);
     }
 
     @PostMapping
-    public String crearCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.save(categoria) + "Categoria creada: " + categoria.getNombre();
+    public Categoria crearCategoria(@RequestBody Categoria categoria) {
+        return categoriaService.save(categoria);
     }
 
     @DeleteMapping("/{id}")
-    public Categoria eliminarCategoria(@PathVariable String id) {
-        return categoriaService.eliminar(Long.parseLong(id));       
+    public String eliminarCategoria(@PathVariable Long id) {
+        categoriaService.eliminar(id);
+        return "Categoria eliminada exitosamente";
     }
 }

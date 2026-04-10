@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -25,7 +26,7 @@ public class Pedido {
     private Usuario usuario;
 
     @ManyToMany
-    private List<Producto> productos;
+    private List<Producto> productos = new ArrayList<>();
     private String estado;
     private String direccionEnvio;
 

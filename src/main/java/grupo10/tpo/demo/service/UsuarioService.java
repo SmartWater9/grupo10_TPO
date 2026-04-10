@@ -8,12 +8,18 @@ import jakarta.transaction.Transactional;
 import grupo10.tpo.demo.model.Usuario;
 import grupo10.tpo.demo.repository.UsuarioRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    public List<Usuario> getAllUsuarios() {
+        return usuarioRepository.findAll();
+    }
 
     public Usuario getUser(Long id) {
         return usuarioRepository.findById(id).orElse(null);
@@ -23,4 +29,10 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public void eliminar(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+        usuarioRepository.deleteById(id);
+    }
 }
