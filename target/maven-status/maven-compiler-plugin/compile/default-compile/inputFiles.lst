@@ -4,6 +4,8 @@
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ControllerUsuario.java
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/controller/ProductoController.java
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/dto/ProductoDTO.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/dto/usuario/UsuarioRegistroRequest.java
+/Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/dto/usuario/UsuarioResponse.java
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Categoria.java
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Pedido.java
 /Users/facundogarompolo/Downloads/apis/grupo10_TPO/src/main/java/grupo10/tpo/demo/model/Producto.java
