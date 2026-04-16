@@ -6,6 +6,7 @@ import grupo10.tpo.demo.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ControllerUsuario {
     @Autowired
     private UsuarioService usuarioService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<UsuarioResponse> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
@@ -33,9 +35,11 @@ public class ControllerUsuario {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+
 }
