@@ -37,4 +37,8 @@ public class Usuario  {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Sexo sexo;
+
+    @NotNull
+    @Column(nullable = false)
+    private String Rol;
 }
