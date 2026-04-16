@@ -1,10 +1,10 @@
 package grupo10.tpo.demo.controller;
 
+import grupo10.tpo.demo.dto.usuario.AuthResponse;
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
 import grupo10.tpo.demo.service.UsuarioService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping("/api/usuarios")
 public class ControllerUsuario {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+
+    public ControllerUsuario(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
@@ -30,8 +33,8 @@ public class ControllerUsuario {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<UsuarioResponse> registrarUsuario(@Valid @RequestBody UsuarioRegistroRequest request) {
-        UsuarioResponse response = usuarioService.registrarUsuario(request);
+    public ResponseEntity<AuthResponse> registrarUsuario(@Valid @RequestBody UsuarioRegistroRequest request) {
+        AuthResponse response = usuarioService.registrarUsuario(request);
         return ResponseEntity.ok(response);
     }
 
@@ -41,5 +44,4 @@ public class ControllerUsuario {
         usuarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

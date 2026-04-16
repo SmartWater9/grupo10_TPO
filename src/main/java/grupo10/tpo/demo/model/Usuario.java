@@ -1,5 +1,6 @@
 package grupo10.tpo.demo.model;
 
+import grupo10.tpo.demo.model.enums.Rol;
 import grupo10.tpo.demo.model.enums.Sexo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -39,6 +40,7 @@ public class Usuario  {
     private Sexo sexo;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String Rol;
+    private Rol rol;
 }
