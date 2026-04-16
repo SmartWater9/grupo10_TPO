@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import grupo10.tpo.demo.dto.CategoriaDTOSimple;
+import grupo10.tpo.demo.dto.CategoriaRequest;
+import grupo10.tpo.demo.dto.CategoriaResponse;
 import grupo10.tpo.demo.model.Categoria;
 import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.CategoriaRepository;
+import grupo10.tpo.demo.exception.categoria.CategoriaNotFoundException;
+
 
 @Service
 
@@ -19,21 +24,51 @@ public class CategoriaService {
         return categoriaRepository.findAll();   
     }
 
-    public Categoria getCategoriaById(Long id) {
-        return categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+    public CategoriaResponse getCategoriaById(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+            .orElseThrow(() -> new CategoriaNotFoundException(id));
+
+        return toResponse(categoria);
+
     }
 
-    public Categoria save(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+
+    public CategoriaResponse save(CategoriaRequest req) {
+        Categoria categoria = new Categoria();
+        categoria.setNombre(req.getNombre());
+
+        if (req.getCategoriaPadreId() != null) {
+            Categoria padre = categoriaRepository.findById(req.getCategoriaPadreId())
+                .orElseThrow(() -> new CategoriaNotFoundException(req.getCategoriaPadreId()));
+
+            categoria.setCategoriaPadre(padre);
+        }
+
+        Categoria guardada = categoriaRepository.save(categoria);
+        return toResponse(guardada);
     }
 
     public void eliminar(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new CategoriaNotFoundException(id));
 
-        for(Producto p : categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria no encontrada")).getProductos()) {
+        for (Producto p : categoria.getProductos()) {
             p.getCategorias().remove(categoria);
         }
 
         categoriaRepository.delete(categoria);
+    }
+
+
+    private CategoriaResponse toResponse(Categoria categoria) {
+        return new CategoriaResponse(
+            categoria.getId(),
+            categoria.getNombre(),
+            categoria.getCategoriaPadre() != null 
+                ? categoria.getCategoriaPadre().getId() 
+                : null,
+            categoria.getSubCategorias().stream()
+                .map(sub -> new CategoriaDTOSimple(sub.getId(), sub.getNombre()))
+                .toList()
+        );
     }
 }

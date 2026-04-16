@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import grupo10.tpo.demo.dto.ProductoDTO;
+import grupo10.tpo.demo.dto.ProductoRequest;
 import grupo10.tpo.demo.model.Categoria;
 import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.ProductoRepository;
@@ -33,7 +33,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public Producto crearProductoConCategorias(ProductoDTO req){
+    public Producto crearProductoConCategorias(ProductoRequest req){
         Producto producto = new Producto();
         producto.setNombre(req.getNombre());
         producto.setDescripcion(req.getDescripcion());

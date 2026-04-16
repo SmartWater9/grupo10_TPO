@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import grupo10.tpo.demo.service.CategoriaService;
+import grupo10.tpo.demo.dto.CategoriaRequest;
+import grupo10.tpo.demo.dto.CategoriaResponse;
 import grupo10.tpo.demo.model.Categoria;  
 
 import java.util.List;
@@ -21,13 +23,13 @@ public class ControllerCategoria {
     }
 
     @GetMapping("/{id}")
-    public Categoria getCategoriaById(@PathVariable Long id) {
+    public CategoriaResponse getCategoriaById(@PathVariable Long id) {
         return categoriaService.getCategoriaById(id);
     }
 
     @PostMapping
-    public Categoria crearCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.save(categoria);
+    public CategoriaResponse crearCategoria(@RequestBody CategoriaRequest req) {
+        return categoriaService.save(req);
     }
 
     @DeleteMapping("/{id}")

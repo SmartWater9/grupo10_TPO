@@ -4,7 +4,7 @@ import grupo10.tpo.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import grupo10.tpo.demo.dto.ProductoDTO;
+import grupo10.tpo.demo.dto.ProductoRequest;
 import grupo10.tpo.demo.model.Producto;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class ControllerProducto {
     }
     
     @PostMapping
-    public Producto crearProducto(@RequestBody ProductoDTO req) {
+    public Producto crearProducto(@RequestBody ProductoRequest req) {
         return productoService.crearProductoConCategorias(req);
     }
     

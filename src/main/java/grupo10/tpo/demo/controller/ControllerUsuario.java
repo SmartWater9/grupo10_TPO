@@ -1,13 +1,12 @@
 package grupo10.tpo.demo.controller;
 
+import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
+import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
+import grupo10.tpo.demo.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import grupo10.tpo.demo.model.Usuario;
-import grupo10.tpo.demo.service.UsuarioService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -19,19 +18,19 @@ public class ControllerUsuario {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> getAllUsuarios() {
+    public List<UsuarioResponse> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
     }
 
-    //GET USUARIO POR ID
     @GetMapping("/{id}")
-    public Usuario getUsuario(@PathVariable Long id) {
+    public UsuarioResponse getUsuario(@PathVariable Long id) {
         return usuarioService.getUser(id);
     }
 
-    @PostMapping
-    public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.save(usuario);
+    @PostMapping("/registro")
+    public ResponseEntity<UsuarioResponse> registrarUsuario(@Valid @RequestBody UsuarioRegistroRequest request) {
+        UsuarioResponse response = usuarioService.registrarUsuario(request);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
