@@ -2,7 +2,6 @@ package grupo10.tpo.demo.controller;
 
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
-import grupo10.tpo.demo.model.Usuario;
 import grupo10.tpo.demo.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,12 @@ public class ControllerUsuario {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> getAllUsuarios() {
+    public List<UsuarioResponse> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuario(@PathVariable Long id) {
+    public UsuarioResponse getUsuario(@PathVariable Long id) {
         return usuarioService.getUser(id);
     }
 
