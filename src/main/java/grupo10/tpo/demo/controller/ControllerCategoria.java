@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import grupo10.tpo.demo.service.CategoriaService;
-import grupo10.tpo.demo.dto.CategoriaRequest;
-import grupo10.tpo.demo.dto.CategoriaResponse;
+import grupo10.tpo.demo.dto.categoria.CategoriaRequest;
+import grupo10.tpo.demo.dto.categoria.CategoriaResponse;
 import grupo10.tpo.demo.model.Categoria;  
 
 import java.util.List;

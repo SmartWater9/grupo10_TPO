@@ -5,70 +5,97 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import grupo10.tpo.demo.dto.ProductoRequest;
+import grupo10.tpo.demo.dto.categoria.CategoriaDTOSimple;
+import grupo10.tpo.demo.dto.producto.ProductoRequest;
+import grupo10.tpo.demo.dto.producto.ProductoResponse;
+import grupo10.tpo.demo.exception.producto.ProductoNotFoundException;
 import grupo10.tpo.demo.model.Categoria;
 import grupo10.tpo.demo.model.Producto;
-import grupo10.tpo.demo.repository.ProductoRepository;
 import grupo10.tpo.demo.repository.CategoriaRepository;
-
+import grupo10.tpo.demo.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
-
-
 
 @Service
 @Transactional
 public class ProductoService {
- 
+
     @Autowired
     private ProductoRepository productoRepository;
-    
+
     @Autowired
-    private CategoriaRepository CategoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
-    public List<Producto> getAllProductos() {
-        return productoRepository.findAll();
+    public List<ProductoResponse> getAllProductos() {
+        return productoRepository.findAll()
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
-    public Producto save(Producto producto) {
-        return productoRepository.save(producto);
+    public ProductoResponse getProductoById(Long id) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNotFoundException(id));
+
+        return toResponse(producto);
     }
 
-    public Producto crearProductoConCategorias(ProductoRequest req){
+    public List<ProductoResponse> getProductosByCategoriaId(Long categoriaId) {
+        return productoRepository.findByCategorias_Id(categoriaId)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    public ProductoResponse crearProductoConCategorias(ProductoRequest req) {
         Producto producto = new Producto();
         producto.setNombre(req.getNombre());
         producto.setDescripcion(req.getDescripcion());
         producto.setPrecio(req.getPrecio());
         producto.setStock(req.getStock());
 
-        List<Categoria> categorias = CategoriaRepository.findAllById(req.getCategoriaIds());
+        List<Categoria> categorias = categoriaRepository.findAllById(req.getCategoriaIds());
         producto.setCategorias(categorias);
-        return productoRepository.save(producto);
+
+        Producto guardado = productoRepository.save(producto);
+        return toResponse(guardado);
     }
 
-    public void eliminar(Long id) {
-        if (!productoRepository.existsById(id)) {
-            throw new RuntimeException("Producto no encontrado");
-        }
-        productoRepository.deleteById(id);
+    public void eliminarProducto(Long id) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNotFoundException(id));
+
+        productoRepository.delete(producto);
     }
 
-    public Producto getProductoById(Long id) {
-        return productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-    }
-    
-    public List<Producto> getProductosByCategoriaId(Long categoriaId) {
-        return productoRepository.findByCategorias_Id(categoriaId);
-    }
-
-
-    public Producto descontarStock(Long id, int cantidad) {
-        Producto producto = getProductoById(id);
+    public ProductoResponse descontarStock(Long id, int cantidad) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNotFoundException(id));
 
         if (producto.getStock() < cantidad) {
             throw new RuntimeException("No hay suficiente stock disponible");
         }
 
         producto.setStock(producto.getStock() - cantidad);
-        return save(producto);
+
+        Producto actualizado = productoRepository.save(producto);
+        return toResponse(actualizado);
+    }
+
+    private ProductoResponse toResponse(Producto producto) {
+        List<CategoriaDTOSimple> categorias = producto.getCategorias()
+                .stream()
+                .map(categoria -> new CategoriaDTOSimple(
+                        categoria.getId(),
+                        categoria.getNombre()))
+                .toList();
+
+        return new ProductoResponse(
+                producto.getId(),
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getStock(),
+                producto.getDescripcion(),
+                categorias
+        );
     }
 }

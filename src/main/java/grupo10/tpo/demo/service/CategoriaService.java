@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import grupo10.tpo.demo.dto.CategoriaDTOSimple;
-import grupo10.tpo.demo.dto.CategoriaRequest;
-import grupo10.tpo.demo.dto.CategoriaResponse;
+import grupo10.tpo.demo.dto.categoria.CategoriaDTOSimple;
+import grupo10.tpo.demo.dto.categoria.CategoriaRequest;
+import grupo10.tpo.demo.dto.categoria.CategoriaResponse;
 import grupo10.tpo.demo.model.Categoria;
 import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.CategoriaRepository;
