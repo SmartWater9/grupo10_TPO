@@ -1,5 +1,6 @@
 package grupo10.tpo.demo.service;
 
+import grupo10.tpo.demo.dto.LoginRequest;
 import grupo10.tpo.demo.dto.usuario.AuthResponse;
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
@@ -10,6 +11,9 @@ import grupo10.tpo.demo.model.enums.Rol;
 import grupo10.tpo.demo.repository.UsuarioRepository;
 import grupo10.tpo.demo.security.JwtService;
 import jakarta.transaction.Transactional;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +26,16 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public UsuarioService(UsuarioRepository usuarioRepository,
                           PasswordEncoder passwordEncoder,
-                          JwtService jwtService) {
+                          JwtService jwtService,
+                          AuthenticationManager authenticationManager) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
     }
 
     private UsuarioResponse toResponse(Usuario usuario) {
@@ -58,6 +65,7 @@ public class UsuarioService {
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new RecursosDuplicadosException("Ya existe un usuario con ese email");
         }
+        
 
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getNombre());
@@ -72,6 +80,21 @@ public class UsuarioService {
         String token = jwtService.generateToken(usuarioGuardado);
 
         return new AuthResponse(token, toResponse(usuarioGuardado));
+    }
+    public AuthResponse login(LoginRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
+
+        String token = jwtService.generateToken(usuario);
+
+        return new AuthResponse(token, toResponse(usuario));
     }
 
     public void eliminar(Long id) {

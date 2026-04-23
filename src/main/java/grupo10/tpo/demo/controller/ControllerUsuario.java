@@ -4,6 +4,7 @@ import grupo10.tpo.demo.dto.usuario.AuthResponse;
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
 import grupo10.tpo.demo.service.UsuarioService;
+import grupo10.tpo.demo.dto.LoginRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,6 +36,12 @@ public class ControllerUsuario {
     @PostMapping("/registro")
     public ResponseEntity<AuthResponse> registrarUsuario(@Valid @RequestBody UsuarioRegistroRequest request) {
         AuthResponse response = usuarioService.registrarUsuario(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse response = usuarioService.login(request);
         return ResponseEntity.ok(response);
     }
 
