@@ -30,11 +30,9 @@ public class Usuario  {
     @Column(nullable = false)
     private String password;
 
-    @NotNull
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Sexo sexo;
