@@ -1,6 +1,9 @@
 package grupo10.tpo.demo.service;
 
+<<<<<<< HEAD
 import grupo10.tpo.demo.dto.LoginRequest;
+=======
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import grupo10.tpo.demo.dto.usuario.AuthResponse;
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
@@ -10,6 +13,10 @@ import grupo10.tpo.demo.model.Usuario;
 import grupo10.tpo.demo.model.enums.Rol;
 import grupo10.tpo.demo.repository.UsuarioRepository;
 import grupo10.tpo.demo.security.JwtService;
+<<<<<<< HEAD
+=======
+import grupo10.tpo.demo.security.LoginRequest;
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import jakarta.transaction.Transactional;
 
 import org.springframework.security.authentication.AuthenticationManager;

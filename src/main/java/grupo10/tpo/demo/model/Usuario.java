@@ -30,11 +30,17 @@ public class Usuario  {
     @Column(nullable = false)
     private String password;
 
+<<<<<<< HEAD
     @NotNull
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
     @NotNull
+=======
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Sexo sexo;

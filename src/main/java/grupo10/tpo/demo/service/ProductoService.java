@@ -10,9 +10,18 @@ import grupo10.tpo.demo.dto.producto.ProductoRequest;
 import grupo10.tpo.demo.dto.producto.ProductoResponse;
 import grupo10.tpo.demo.exception.producto.ProductoNotFoundException;
 import grupo10.tpo.demo.model.Categoria;
+<<<<<<< HEAD
 import grupo10.tpo.demo.model.Producto;
 import grupo10.tpo.demo.repository.CategoriaRepository;
 import grupo10.tpo.demo.repository.ProductoRepository;
+=======
+import grupo10.tpo.demo.model.Pedido;
+import grupo10.tpo.demo.model.Producto;
+import grupo10.tpo.demo.repository.CategoriaRepository;
+import grupo10.tpo.demo.repository.ProductoRepository;
+import grupo10.tpo.demo.repository.PedidoRepository;
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import jakarta.transaction.Transactional;
 
 @Service
@@ -25,6 +34,12 @@ public class ProductoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private PedidoRepository pedidoRepository; // 🔥 FALTABA ESTO
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
     public List<ProductoResponse> getAllProductos() {
         return productoRepository.findAll()
                 .stream()
@@ -61,8 +76,25 @@ public class ProductoService {
     }
 
     public void eliminarProducto(Long id) {
+<<<<<<< HEAD
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ProductoNotFoundException(id));
+=======
+
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        for (Categoria categoria : producto.getCategorias()) {
+            categoria.getProductos().remove(producto);
+        }
+        producto.getCategorias().clear();
+
+        List<Pedido> pedidos = pedidoRepository.findByProductos_Id(id);
+
+        for (Pedido pedido : pedidos) {
+            pedido.getProductos().remove(producto);
+        }
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 
         productoRepository.delete(producto);
     }

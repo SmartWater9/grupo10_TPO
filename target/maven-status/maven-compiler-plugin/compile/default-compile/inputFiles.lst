@@ -7,9 +7,6 @@ C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\DemoApp
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\categoria\CategoriaDTOSimple.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\categoria\CategoriaRequest.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\categoria\CategoriaResponse.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\CategoriaDTOSimple.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\CategoriaRequest.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\CategoriaResponse.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\LoginRequest.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\pedido\PedidoRequest.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\pedido\PedidoResponse.java
@@ -17,10 +14,6 @@ C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\pro
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\producto\ProductoDTOSimple.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\producto\ProductoRequest.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\producto\ProductoResponse.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\ProductoDTO.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\ProductoDTOSimple.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\ProductoRequest.java
-C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\ProductoResponse.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\usuario\AuthResponse.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\usuario\UsuarioRegistroRequest.java
 C:\Users\Joaco\Downloads\APIS\grupo10_TPO\src\main\java\grupo10\tpo\demo\dto\usuario\UsuarioResponse.java

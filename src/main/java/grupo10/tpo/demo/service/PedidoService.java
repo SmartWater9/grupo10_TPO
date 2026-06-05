@@ -1,5 +1,9 @@
 package grupo10.tpo.demo.service;
 
+<<<<<<< HEAD
+=======
+import grupo10.tpo.demo.dto.pedido.ItemPedidoResponse;
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import grupo10.tpo.demo.dto.pedido.PedidoRequest;
 import grupo10.tpo.demo.dto.pedido.PedidoResponse;
 import grupo10.tpo.demo.model.Pedido;
@@ -15,6 +19,10 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 
 @Service
 @Transactional
@@ -37,6 +45,7 @@ public class PedidoService {
         Usuario usuario = usuarioRepository.findById(request.getUsuarioId())
                 .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
 
+<<<<<<< HEAD
         List<Producto> productos = productoRepository.findAllById(request.getProductoIds());
 
         if (productos.size() != request.getProductoIds().size()) {
@@ -49,6 +58,37 @@ public class PedidoService {
         pedido.setDireccionEnvio(request.getDireccionEnvio());
         pedido.setEstado("PENDIENTE");
 
+=======
+        Pedido pedido = new Pedido();
+        pedido.setUsuario(usuario);
+        pedido.setDireccionEnvio(request.getDireccionEnvio());
+        pedido.setEstado("PENDIENTE");
+
+        List<Producto> productosFinales = new ArrayList<>();
+
+        for (var item : request.getItems()) {
+
+            Producto producto = productoRepository.findById(item.getProductoId())
+                    .orElseThrow(() -> new ProductoNotFoundException(
+                            "Producto no encontrado: " + item.getProductoId()
+                    ));
+
+            if (producto.getStock() < item.getCantidad()) {
+                throw new RuntimeException(
+                        "Stock insuficiente para producto: " + producto.getNombre()
+                );
+            }
+
+            producto.setStock(producto.getStock() - item.getCantidad());
+
+            for (int i = 0; i < item.getCantidad(); i++) {
+                productosFinales.add(producto);
+            }
+        }
+
+        pedido.setProductos(productosFinales);
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
         Pedido guardado = pedidoRepository.save(pedido);
 
         return toResponse(guardado);
@@ -75,6 +115,7 @@ public class PedidoService {
         pedidoRepository.delete(pedido);
     }
 
+<<<<<<< HEAD
     private PedidoResponse toResponse(Pedido pedido) {
         return new PedidoResponse(
                 pedido.getId(),
@@ -84,4 +125,28 @@ public class PedidoService {
                 pedido.getDireccionEnvio()
         );
     }
+=======
+private PedidoResponse toResponse(Pedido pedido) {
+
+    java.util.Map<Long, Integer> contador = new java.util.HashMap<>();
+
+    for (Producto p : pedido.getProductos()) {
+        contador.put(p.getId(), contador.getOrDefault(p.getId(), 0) + 1);
+    }
+
+    List<ItemPedidoResponse> items = contador.entrySet()
+            .stream()
+            .map(e -> new ItemPedidoResponse(e.getKey(), e.getValue()))
+            .toList();
+
+    return new PedidoResponse(
+            pedido.getId(),
+            pedido.getUsuario().getId(),
+            items,
+            pedido.getEstado(),
+            pedido.getDireccionEnvio()
+    );
+}
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 }

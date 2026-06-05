@@ -19,10 +19,15 @@ public class UsuarioRegistroRequest {
     @NotBlank
     private String password;
 
+<<<<<<< HEAD
     @NotNull
     private LocalDate fechaNacimiento;
 
     @NotNull
+=======
+    private LocalDate fechaNacimiento;
+
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
     private Sexo sexo;
 
     public UsuarioRegistroRequest() {

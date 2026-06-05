@@ -3,10 +3,7 @@ package grupo10.tpo.demo.config;
 import grupo10.tpo.demo.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-<<<<<<< HEAD
-=======
 import org.springframework.http.HttpMethod;
->>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -18,15 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-<<<<<<< HEAD
-=======
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 
->>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 
 @Configuration
 @EnableMethodSecurity
@@ -41,24 +35,6 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-<<<<<<< HEAD
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuarios/registro", "/api/usuarios/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
-=======
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -69,7 +45,8 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             )
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/usuarios/registro", "/api/usuarios/login").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/productos").permitAll() // nuevo
+                    .requestMatchers(HttpMethod.GET, "/api/productos").permitAll() 
+                    .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
                     .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())
@@ -77,7 +54,6 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.build();
 }
 
->>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -95,8 +71,6 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-<<<<<<< HEAD
-=======
 
 
     @Bean
@@ -111,5 +85,4 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
->>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 }

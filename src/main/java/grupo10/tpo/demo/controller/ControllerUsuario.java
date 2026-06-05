@@ -4,7 +4,11 @@ import grupo10.tpo.demo.dto.usuario.AuthResponse;
 import grupo10.tpo.demo.dto.usuario.UsuarioRegistroRequest;
 import grupo10.tpo.demo.dto.usuario.UsuarioResponse;
 import grupo10.tpo.demo.service.UsuarioService;
+<<<<<<< HEAD
 import grupo10.tpo.demo.dto.LoginRequest;
+=======
+import grupo10.tpo.demo.security.LoginRequest;
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

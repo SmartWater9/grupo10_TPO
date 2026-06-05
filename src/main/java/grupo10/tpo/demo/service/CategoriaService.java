@@ -54,7 +54,12 @@ public class CategoriaService {
         for (Producto p : categoria.getProductos()) {
             p.getCategorias().remove(categoria);
         }
+<<<<<<< HEAD
 
+=======
+        
+        categoria.getProductos().clear();
+>>>>>>> 83a4da560773229a5fb3417f7ef6f0c1fe98e8b7
         categoriaRepository.delete(categoria);
     }
 
